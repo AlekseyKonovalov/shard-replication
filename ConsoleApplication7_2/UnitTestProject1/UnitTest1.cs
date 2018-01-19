@@ -27,11 +27,13 @@ namespace UnitTestProject1
     }
 
     [TestClass]
-    public class UnitTest1 : Sender
+    public class UnitTest1 
     {
         static private string port = "9000";
         static private string countNodes = "2";
-        
+        static private string baseAddress = "http://localhost:" + port + "/";
+
+
         static private string pathToProxy = "D:\\Github\\shard-replication\\ConsoleApplication7_2\\Proxy2\\bin\\Debug\\Proxy2.exe";
         static private string pathToNode = "D:\\Github\\shard-replication\\ConsoleApplication7_2\\ConsoleApplication7\\bin\\Debug\\Node.exe";
 
@@ -39,8 +41,7 @@ namespace UnitTestProject1
         public Dictionary<string, string> testData;
 
         public UnitTest1()
-        {
-            baseAddress = "http://localhost:"+ port + "/";
+        {           
             testData = new TestDataGenerator().GenerateTestData();
         }
 
@@ -66,7 +67,13 @@ namespace UnitTestProject1
            
             foreach (var item in testData)
             {
-                Put(item.Key, item.Value);
+                HttpClient client = new HttpClient();
+                var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(item.Value));
+                jsonContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json"); ;
+                var response = client.PutAsync("http://localhost:" + port + "/api/values/" + item.Key,
+                  jsonContent
+                   ).Result;
+
             }
             int newSize = File.ReadAllLines(path).Length;
 
@@ -80,7 +87,18 @@ namespace UnitTestProject1
 
             foreach (var item in testData)
             {
-                string content = Get(item.Key);
+                string content;
+                               
+                HttpClient client = new HttpClient();
+                var response = client.GetAsync("http://localhost:" + port + "/api/values/" + item.Key).Result;
+                var tmp = response.StatusCode;
+                if (response.StatusCode.ToString() != "OK")
+                {
+                    content= System.Net.HttpStatusCode.BadRequest.ToString();
+                }
+                else
+                    content= JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result).ToString();
+                                
                 Assert.AreNotEqual(content, "BadRequest");
                 Assert.AreEqual(content, item.Value);
             }
@@ -94,7 +112,12 @@ namespace UnitTestProject1
             
             foreach (var item in testData)
             {
-                Put(item.Key, item.Value);
+                HttpClient client = new HttpClient();
+                var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(item.Value));
+                jsonContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json"); ;
+                var response = client.PutAsync("http://localhost:" + port + "/api/values/" + item.Key,
+                  jsonContent
+                   ).Result;
             }
 
             GetValues();
@@ -126,7 +149,7 @@ namespace UnitTestProject1
 
     
     [TestClass]
-    public class UnitTest2 : Sender
+    public class UnitTest2 
     {
         static private string pathToNode = "D:\\Github\\shard-replication\\ConsoleApplication7_2\\ConsoleApplication7\\bin\\Debug\\Node.exe";
         [TestMethod]
