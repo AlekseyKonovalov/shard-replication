@@ -1,0 +1,76 @@
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Node.exe.config
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Node.exe
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Node.pdb
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.dll
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.Host.HttpListener.dll
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.Hosting.dll
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Owin.dll
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.dll
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.Owin.dll
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.SelfHost.dll
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.xml
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.Host.HttpListener.xml
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.Hosting.xml
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.xml
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.Owin.xml
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.SelfHost.xml
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\obj\Debug\Node.csproj.CoreCompileInputs.cache
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\obj\Debug\Node.exe
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\obj\Debug\Node.pdb
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\ru\System.Net.Http.Formatting.resources.dll
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\ru\System.Web.Http.resources.dll
+C:\Users\Алексей\Documents\GitHub\Distributed-information-systems\ConsoleApplication7_2\ConsoleApplication7\obj\Debug\Node.csprojResolveAssemblyReference.cache
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Node.exe.config
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Node.exe
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Node.pdb
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.dll
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.Host.HttpListener.dll
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.Hosting.dll
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Newtonsoft.Json.dll
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Owin.dll
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Net.Http.Formatting.dll
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.dll
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.Owin.dll
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.SelfHost.dll
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.xml
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.Host.HttpListener.xml
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.Hosting.xml
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Newtonsoft.Json.xml
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Net.Http.Formatting.xml
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.xml
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.Owin.xml
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.SelfHost.xml
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\ru\System.Net.Http.Formatting.resources.dll
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\ru\System.Web.Http.resources.dll
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\obj\Debug\Node.csproj.CoreCompileInputs.cache
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\obj\Debug\Node.exe
+D:\Github\sharding replication\Distributed-information-systems-master\ConsoleApplication7_2\ConsoleApplication7\obj\Debug\Node.pdb
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Node.exe.config
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Node.exe
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Node.pdb
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.dll
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.Host.HttpListener.dll
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.Hosting.dll
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Newtonsoft.Json.dll
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Owin.dll
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Net.Http.Formatting.dll
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.dll
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.Owin.dll
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.SelfHost.dll
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.xml
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.Host.HttpListener.xml
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Microsoft.Owin.Hosting.xml
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\Newtonsoft.Json.xml
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Net.Http.Formatting.xml
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.xml
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.Owin.xml
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\System.Web.Http.SelfHost.xml
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\ru\System.Net.Http.Formatting.resources.dll
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\bin\Debug\ru\System.Web.Http.resources.dll
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\obj\Debug\Node.csproj.CoreCompileInputs.cache
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\obj\Debug\Node.exe
+D:\Github\sharding replication\ConsoleApplication7_2\ConsoleApplication7\obj\Debug\Node.pdb
