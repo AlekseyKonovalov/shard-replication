@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Net.Http;
 
 namespace Proxy
 {
@@ -17,37 +20,20 @@ namespace Proxy
             return key/Convert.ToInt32(Storage.countNodes);
         }       
 
-        private void readAll(string currentPort)
-        {
-            string filePath= @"nodes\" + currentPort + ".txt";
-            foreach (var item in File.ReadLines(filePath).ToList())
-            {
-                string key = item.Split(' ')[0];
-                string value = item.Split(' ')[1];
-                dictionaryDB.Add(key, value);
-            }
-        }
-
-        private void writeAll(string currentPort)
-        {
-            string filePath = @"nodes\" + currentPort + ".txt";
-            using (StreamWriter writer = new StreamWriter(filePath, false))
-            {
-                foreach (var item in dictionaryDB)
-                {
-                    writer.Write(item.Key + " ");
-                    writer.WriteLine(item.Value);
-                }
-            }
-        }
-
-
         // GET api/values/5 
         public string Get(string id)
         {
-            string currentPort = (Storage.defaultPort + shard(Convert.ToInt32(id))).ToString(); 
-            readAll(currentPort) ;
-            return dictionaryDB[id];
+            string currentPort = (Storage.defaultPort + shard(Convert.ToInt32(id))).ToString();
+
+            HttpClient client = new HttpClient();
+            var response = client.GetAsync("http://localhost:"+ currentPort + "/api/values/" + id).Result;
+            var tmp = response.StatusCode;
+            if (response.StatusCode.ToString() != "OK")
+            {
+                return System.Net.HttpStatusCode.BadRequest.ToString();
+            }
+            else
+                return JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result).ToString();
         }
 
 
@@ -55,28 +41,20 @@ namespace Proxy
         public void Put(string id, [FromBody]string value)
         {
             string currentPort = (Storage.defaultPort + shard(Convert.ToInt32(id))).ToString();
-            readAll(currentPort);
-            if (!dictionaryDB.ContainsKey(id))
-            {
-                dictionaryDB.Add(id, value);
-            }
-            else
-            {
-                dictionaryDB[id] = value;
-            }
-            writeAll(currentPort);
+
+            HttpClient client = new HttpClient();
+            var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(value));
+            jsonContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json"); ;
+            var response = client.PutAsync("http://localhost:" + currentPort + "/api/values/" + id,
+              jsonContent
+               ).Result;
 
         }
 
         public void Delete(string id)
         {
             string currentPort = (Storage.defaultPort + shard(Convert.ToInt32(id))).ToString();
-            readAll(currentPort);
-            if (dictionaryDB.ContainsKey(id))
-            {
-                dictionaryDB.Remove(id);
-            }
-            writeAll(currentPort);
+            var result = new HttpClient().DeleteAsync("http://localhost:" + currentPort + "/api/values/" + id).Result;
         }
 
     }
