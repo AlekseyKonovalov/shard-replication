@@ -11,14 +11,13 @@ using System.Net.Http;
 
 namespace Proxy
 {
-    class NodesController
+    public class NodesController : ApiController
     {
-        private Dictionary<string, string> dictionaryDB = new Dictionary<string, string>();
-
+  
         private int shard(int key)
         {
             return key/Convert.ToInt32(Storage.countNodes);
-        }       
+        }
 
         // GET api/values/5 
         public string Get(string id)
@@ -26,7 +25,7 @@ namespace Proxy
             string currentPort = (Storage.defaultPort + shard(Convert.ToInt32(id))).ToString();
 
             HttpClient client = new HttpClient();
-            var response = client.GetAsync("http://localhost:"+ currentPort + "/api/values/" + id).Result;
+            var response = client.GetAsync("http://localhost:" + currentPort + "/api/values/" + id).Result;
             var tmp = response.StatusCode;
             if (response.StatusCode.ToString() != "OK")
             {

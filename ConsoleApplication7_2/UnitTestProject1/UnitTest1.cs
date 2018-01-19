@@ -32,18 +32,18 @@ namespace UnitTestProject1
         static private string port = "9000";
         static private string countNodes = "2";
         
-        static private string pathToProxy = "D:\\Github\\sharding replication\\ConsoleApplication7_2\\Proxy2\\bin\\Debug\\Proxy2.exe";
-        static private string pathToNode = "";
+        static private string pathToProxy = "D:\\Github\\shard-replication\\ConsoleApplication7_2\\Proxy2\\bin\\Debug\\Proxy2.exe";
+        static private string pathToNode = "D:\\Github\\shard-replication\\ConsoleApplication7_2\\ConsoleApplication7\\bin\\Debug\\Node.exe";
 
         private string path = @"nodes\"+port+".txt";
         public Dictionary<string, string> testData;
 
         public UnitTest1()
         {
-            baseAddress = "http://localhost:"+port+"/";
+            baseAddress = "http://localhost:"+ port + "/";
             testData = new TestDataGenerator().GenerateTestData();
-
         }
+
         [TestMethod]
         public void OpenConnection()
         {
@@ -124,18 +124,18 @@ namespace UnitTestProject1
         */
     }
 
-    /*
+    
     [TestClass]
     public class UnitTest2 : Sender
     {
-        
+        static private string pathToNode = "D:\\Github\\shard-replication\\ConsoleApplication7_2\\ConsoleApplication7\\bin\\Debug\\Node.exe";
         [TestMethod]
         public void StartTwoNodes()
         {
-            Process.Start("Node.exe", "9001");
-            Process.Start("Node.exe", "9002");
+            Process.Start(pathToNode, "9001");
+            Process.Start(pathToNode, "9002");
         }
 
     }
-    */
+    
 }

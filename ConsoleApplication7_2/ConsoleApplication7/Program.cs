@@ -16,8 +16,8 @@ namespace ConsoleApplication7
 
         static void Main(string[] args)
         {
-           
-            Storage.port =args[0];
+            //Storage.port = args[0];
+            Storage.port = "9001";
             
             CreateDB();
             
