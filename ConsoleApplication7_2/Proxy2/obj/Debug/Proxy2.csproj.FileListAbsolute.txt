@@ -45,3 +45,4 @@ D:\Github\shard-replication\ConsoleApplication7_2\Proxy2\bin\Debug\ru\System.Web
 D:\Github\shard-replication\ConsoleApplication7_2\Proxy2\obj\Debug\Proxy2.csproj.CoreCompileInputs.cache
 D:\Github\shard-replication\ConsoleApplication7_2\Proxy2\obj\Debug\Proxy2.exe
 D:\Github\shard-replication\ConsoleApplication7_2\Proxy2\obj\Debug\Proxy2.pdb
+D:\Github\shard-replication\ConsoleApplication7_2\Proxy2\obj\Debug\Proxy2.csprojResolveAssemblyReference.cache

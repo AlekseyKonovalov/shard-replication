@@ -16,7 +16,8 @@ namespace Proxy
   
         private int shard(int key)
         {
-            return key/Convert.ToInt32(Storage.countNodes);
+            //return key / 2;
+            return key / Convert.ToInt32(Storage.countNodes);
         }
 
         // GET api/values/5 

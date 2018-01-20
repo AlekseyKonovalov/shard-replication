@@ -1,0 +1,7 @@
+D:\Github\shard-replication\ConsoleApplication7_2\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+D:\Github\shard-replication\ConsoleApplication7_2\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+D:\Github\shard-replication\ConsoleApplication7_2\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+D:\Github\shard-replication\ConsoleApplication7_2\ConsoleApp1\obj\Debug\ConsoleApp1.csprojResolveAssemblyReference.cache
+D:\Github\shard-replication\ConsoleApplication7_2\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
+D:\Github\shard-replication\ConsoleApplication7_2\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+D:\Github\shard-replication\ConsoleApplication7_2\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
