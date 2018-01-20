@@ -32,6 +32,17 @@ namespace ConsoleApplication7
                 }
             }
         }
+
+        private void writeNote(string key , string value)
+        {
+            using (StreamWriter writer = new StreamWriter(Storage.filePath, false))
+            {
+
+                    writer.Write(key + " ");
+                    writer.WriteLine(value);
+               
+            }
+        }
         
 
         // GET api/values/5 
@@ -56,6 +67,7 @@ namespace ConsoleApplication7
                 dictionary[id] = value;
             }
             writeAll();
+            //writeNote(id, value);
             
         }
 

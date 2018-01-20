@@ -17,7 +17,7 @@ namespace UnitTestProject1
         public Dictionary<string, string> GenerateTestData()
         {
             Dictionary<string, string> testData=new Dictionary<string, string>();
-            int count = 100;
+            int count = 1000;
 
             for (int i = 0; i < count; i++)
             {
@@ -148,8 +148,7 @@ namespace UnitTestProject1
             }
         }
     }
-
-
+    
     [TestClass]
     public class UnitTest2
     {
@@ -177,7 +176,7 @@ namespace UnitTestProject1
     public class UnitTest3 
     {
         static private string port = "9100";
-        static private string countNodes = "2";
+        static private string countNodes = "4";
         static private string pathToProxy = "D:\\Github\\shard-replication\\Proxy2\\bin\\Debug\\Proxy2.exe";
 
         public Dictionary<string, string> testData;
@@ -239,10 +238,10 @@ namespace UnitTestProject1
             {
                 var result = new HttpClient().DeleteAsync("http://localhost:" + port + "/api/nodes/" + item.Key).Result;
             }
-            checkRemoved();
+            CheckRemoved();
         }       
  
-        private  void checkRemoved()
+        private void CheckRemoved()
         {
             foreach (var item in testData)
             {               

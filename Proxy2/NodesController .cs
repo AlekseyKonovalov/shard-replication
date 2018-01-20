@@ -13,14 +13,60 @@ namespace Proxy
 {
     public class NodesController : ApiController
     {
-  
-        private int shard(int key)
+        private class TableNote
         {
-            //return key / 2;
-            return key % Convert.ToInt32(Storage.countNodes);
+            public TableNote(int BottomLine, int UpperLine,  int Port)
+            {
+                this.BottomLine = BottomLine;
+                this.UpperLine = UpperLine;
+                this.Port = Port;
+            }
+            public int BottomLine;
+            public int UpperLine;
+            public int Port;
         }
 
-        // GET api/values/5 
+
+        private string fileTablePath= @"table\" + Storage.countNodes + ".txt";
+        private List<TableNote> TableNoteList = new List<TableNote>();
+
+        
+        private int shard2(int key)
+        {
+            return key % Convert.ToInt32(Storage.countNodes);
+        }        
+
+        private void readAll()
+        {
+            if (File.Exists(fileTablePath)){
+                foreach (var item in File.ReadLines(fileTablePath).ToList())
+                {
+                    string bottomLine = item.Split(' ')[0];
+                    string upperLine = item.Split(' ')[1];
+                    string port = item.Split(' ')[2];
+
+                    TableNoteList.Add(new TableNote(Convert.ToInt32(bottomLine),
+                        Convert.ToInt32(upperLine), Convert.ToInt32(port)));
+
+                }
+            }
+        }
+
+        private int shard(int key)
+        {
+            readAll();
+            foreach(var item in TableNoteList)
+            {
+                if (key >= item.BottomLine && key<=item.UpperLine)
+                {
+                    return item.Port;
+                }
+            }
+            return 0;
+        }
+
+
+        // GET api/nodes/5 
         public string Get(string id)
         {
             string currentPort = (Storage.defaultPort + shard(Convert.ToInt32(id))).ToString();
@@ -37,10 +83,12 @@ namespace Proxy
         }
 
 
-        // PUT api/values/5 
+        // PUT api/nodes/5 
         public void Put(string id, [FromBody]string value)
         {
-            string currentPort = (Storage.defaultPort + shard(Convert.ToInt32(id))).ToString();
+            //string currentPort = (Storage.defaultPort + shard2(Convert.ToInt32(id))).ToString();
+            string currentPort = shard(Convert.ToInt32(id)).ToString();
+
 
             HttpClient client = new HttpClient();
             var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(value));
@@ -49,6 +97,9 @@ namespace Proxy
               jsonContent
                ).Result;
 
+            //dictionary.Add(id, currentPort);
+            //writeNote(id, currentPort);
+
         }
 
         public void Delete(string id)
@@ -56,6 +107,8 @@ namespace Proxy
             string currentPort = (Storage.defaultPort + shard(Convert.ToInt32(id))).ToString();
             var result = new HttpClient().DeleteAsync("http://localhost:" + currentPort + "/api/values/" + id).Result;
         }
+
+
 
     }
 }
