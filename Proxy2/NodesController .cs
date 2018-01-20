@@ -86,9 +86,6 @@ namespace Proxy
               jsonContent
                ).Result;
 
-            //dictionary.Add(id, currentPort);
-            //writeNote(id, currentPort);
-
         }
 
         public void Delete(string id)
