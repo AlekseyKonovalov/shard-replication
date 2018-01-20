@@ -24,7 +24,7 @@ namespace Proxy
         }  
         */      
 
-        private void readAll()
+        private void readTable()
         {
             if (File.Exists(fileTablePath)){
                 foreach (var item in File.ReadLines(fileTablePath).ToList())
@@ -42,7 +42,7 @@ namespace Proxy
 
         private int shard(int key)
         {
-            readAll();
+            readTable();
             foreach(var item in TableNoteList)
             {
                 if (key >= item.BottomLine && key<=item.UpperLine)
