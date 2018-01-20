@@ -17,30 +17,36 @@ namespace Proxy2
     {
         private List<TableNote> tableNoteList;
         private List<TableNote> lastTableNoteList;
-        
 
-        public NodeDistributor()
+        public void Resharding()
         {
             if (!(Storage.countNodes.Equals(Storage.lastCountNodes)))
             {
                 tableNoteList = readTable(Storage.countNodes);
                 lastTableNoteList = readTable(Storage.lastCountNodes);
 
-                for (int i = 0; i < tableNoteList.Count(); i++){
-                    if(tableNoteList[i].Port != lastTableNoteList[i].Port)
+                for (int i = 0; i < tableNoteList.Count(); i++)
+                {
+                    if (tableNoteList[i].Port != lastTableNoteList[i].Port)
                     {
-                        for (int j = lastTableNoteList[i].BottomLine; 
-                            j< lastTableNoteList[i].UpperLine; j++)
+                        for (int j = lastTableNoteList[i].BottomLine;
+                            j < lastTableNoteList[i].UpperLine; j++)
                         {
+                            string content;
                             // гет к ласту
-                            // пут к карренту
-                            // delete к ласту
+                            content = Get(lastTableNoteList[i].Port, j);
+                            if (!(content.Equals("BadRequest")))
+                            {
+                                // пут к карренту
+                                Put(content, tableNoteList[i].Port.ToString(), j.ToString());
+                                // delete к ласту
+                                Delete(lastTableNoteList[i].Port.ToString(), j.ToString());
+                            }
                         }
 
                     }
                 }
             }
-
         }
 
         private List<TableNote> readTable(string countNodes)
@@ -63,5 +69,40 @@ namespace Proxy2
             }
             return tblNoteList;
         }
+
+        private string Get(int port, int  key)
+        {
+            string content;
+
+            HttpClient client = new HttpClient();
+            var response = client.GetAsync("http://localhost:" + port.ToString() + "/api/values/" + key.ToString()).Result;
+            var tmp = response.StatusCode;
+            if (response.StatusCode.ToString() != "OK")
+            {
+                content = "BadRequest";
+            }
+            else
+                content = JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result).ToString();
+
+            return content;
+        }
+
+        private void Put(string value, string port, string key)
+        {
+
+            HttpClient client = new HttpClient();
+            var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(value));
+            jsonContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json"); ;
+            var response = client.PutAsync("http://localhost:" + port + "/api/values/" + key,
+              jsonContent
+               ).Result;
+
+        }
+
+        private void Delete(string port, string key)
+        {
+            var result = new HttpClient().DeleteAsync("http://localhost:" + port + "/api/values/" + key).Result;
+        }
     }
+
 }

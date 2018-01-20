@@ -23,6 +23,7 @@ namespace UnitTestProject1
             {
                 testData.Add(i.ToString(), (i*10).ToString());
             }
+
             return testData;
         }        
     }
@@ -152,6 +153,9 @@ namespace UnitTestProject1
     [TestClass]
     public class UnitTest2
     {
+        static private string lastCountNodes = "2";
+        static private string countNodes = "4";
+        static private string pathToProxy = "D:\\Github\\shard-replication\\Proxy2\\bin\\Debug\\Proxy2.exe";
         static private string pathToNode = "D:\\Github\\shard-replication\\ConsoleApplication7\\bin\\Debug\\Node.exe";
 
         [TestMethod]
@@ -168,6 +172,13 @@ namespace UnitTestProject1
             Process.Start(pathToNode, "9001");
             Process.Start(pathToNode, "9002");
             Process.Start(pathToNode, "9003");
+        }
+
+
+        [TestMethod]
+        public void StartProxyWithReshard()
+        {
+            Process.Start(pathToProxy, countNodes + "&"+ lastCountNodes);
         }
 
     }
