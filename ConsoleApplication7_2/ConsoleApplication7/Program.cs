@@ -30,7 +30,8 @@ namespace ConsoleApplication7
 
         static private void CreateDB()
         {
-            Storage.filePath= @"nodes\" + Storage.port + ".txt";
+            //Storage.filePath= @"nodes\" + Storage.port + ".txt";
+            Storage.filePath = @"nodes\" + Storage.port + ".txt";
 
             if (!File.Exists(Storage.filePath))
             {

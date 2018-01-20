@@ -17,7 +17,7 @@ namespace UnitTestProject1
         public Dictionary<string, string> GenerateTestData()
         {
             Dictionary<string, string> testData=new Dictionary<string, string>();
-            int count = 10;
+            int count = 100;
             for (int i = 0; i < count; i++)
             {
                 testData.Add(i.ToString(), (i*10).ToString());
@@ -181,14 +181,12 @@ namespace UnitTestProject1
         public void OpenConnection()
         {
             Process.Start(pathToProxy, countNodes);
-
         }
       
 
         [TestMethod]
         public void PutValues()
-        {
-           
+        {           
             foreach (var item in testData)
             {
                 HttpClient client = new HttpClient();
@@ -200,8 +198,6 @@ namespace UnitTestProject1
                 int i = 0;
 
             }
-
-
         }
 
         [TestMethod]
@@ -229,8 +225,7 @@ namespace UnitTestProject1
 
         [TestMethod]
         public void UpdateValues()
-        {
-            
+        {            
             foreach (var item in testData)
             {
                 HttpClient client = new HttpClient();
@@ -240,7 +235,6 @@ namespace UnitTestProject1
                   jsonContent
                    ).Result;
             }
-
             GetValues();
 
         }
