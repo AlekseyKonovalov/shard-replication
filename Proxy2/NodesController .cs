@@ -95,7 +95,7 @@ namespace Proxy
         {
             string currentPort = shard(Convert.ToInt32(id)).ToString();
             //string currentPort = (Storage.defaultPort + shard(Convert.ToInt32(id))).ToString();
-          
+            var result = new HttpClient().DeleteAsync("http://localhost:" + currentPort + "/api/values/" + id).Result;
 
         }
 

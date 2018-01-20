@@ -17,7 +17,7 @@ namespace Proxy
         {
             Storage.countNodes = args[0];
             //Storage.countNodes = "4";
-            Storage.defaultPort = 9000;
+            //Storage.defaultPort = 9000;
             
             if (args[1] != null)
             {
@@ -29,7 +29,7 @@ namespace Proxy
 
 
             //adress proxy
-            string baseAddress = "http://localhost:" + (Storage.defaultPort+100).ToString() + "/";
+            string baseAddress = "http://localhost:9100/";
             // Start OWIN host 
             using (WebApp.Start<Startup>(url: baseAddress))
             {
