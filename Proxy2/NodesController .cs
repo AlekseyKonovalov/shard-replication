@@ -8,33 +8,21 @@ using System.Web.Http;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Http;
+using Proxy2;
 
 namespace Proxy
 {
     public class NodesController : ApiController
     {
-        private class TableNote
-        {
-            public TableNote(int BottomLine, int UpperLine,  int Port)
-            {
-                this.BottomLine = BottomLine;
-                this.UpperLine = UpperLine;
-                this.Port = Port;
-            }
-            public int BottomLine;
-            public int UpperLine;
-            public int Port;
-        }
-
-
         private string fileTablePath= @"table\" + Storage.countNodes + ".txt";
         private List<TableNote> TableNoteList = new List<TableNote>();
 
-        
+        /*
         private int shard2(int key)
         {
             return key % Convert.ToInt32(Storage.countNodes);
-        }        
+        }  
+        */      
 
         private void readAll()
         {
@@ -69,7 +57,8 @@ namespace Proxy
         // GET api/nodes/5 
         public string Get(string id)
         {
-            string currentPort = (Storage.defaultPort + shard(Convert.ToInt32(id))).ToString();
+            //string currentPort = (Storage.defaultPort + shard(Convert.ToInt32(id))).ToString();
+            string currentPort = shard(Convert.ToInt32(id)).ToString();
 
             HttpClient client = new HttpClient();
             var response = client.GetAsync("http://localhost:" + currentPort + "/api/values/" + id).Result;
@@ -104,7 +93,8 @@ namespace Proxy
 
         public void Delete(string id)
         {
-            string currentPort = (Storage.defaultPort + shard(Convert.ToInt32(id))).ToString();
+            string currentPort = shard(Convert.ToInt32(id)).ToString();
+            //string currentPort = (Storage.defaultPort + shard(Convert.ToInt32(id))).ToString();
             var result = new HttpClient().DeleteAsync("http://localhost:" + currentPort + "/api/values/" + id).Result;
         }
 

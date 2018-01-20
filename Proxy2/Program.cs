@@ -13,6 +13,7 @@ namespace Proxy
             Storage.countNodes = args[0];
             //Storage.countNodes = "4";
             Storage.defaultPort = 9000;
+            Storage.lastCountNodes = 2;
 
             //adress proxy
             string baseAddress = "http://localhost:" + (Storage.defaultPort+100).ToString() + "/";
