@@ -176,7 +176,7 @@ namespace UnitTestProject1
     public class UnitTest3 
     {
         static private string port = "9100";
-        static private string countNodes = "4";
+        static private string countNodes = "2";
         static private string pathToProxy = "D:\\Github\\shard-replication\\Proxy2\\bin\\Debug\\Proxy2.exe";
 
         public Dictionary<string, string> testData;
