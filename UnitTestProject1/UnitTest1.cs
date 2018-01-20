@@ -178,7 +178,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void StartProxyWithReshard()
         {
-            Process.Start(pathToProxy, countNodes + "&"+ lastCountNodes);
+            Process.Start(pathToProxy, countNodes + " "+ lastCountNodes);
         }
 
     }
@@ -214,8 +214,6 @@ namespace UnitTestProject1
                 var response = client.PutAsync("http://localhost:" + port + "/api/nodes/" + item.Key,
                   jsonContent
                    ).Result;
-                int i = 0;
-
             }
         }
 
