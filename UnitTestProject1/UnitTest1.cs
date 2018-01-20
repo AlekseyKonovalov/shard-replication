@@ -18,6 +18,7 @@ namespace UnitTestProject1
         {
             Dictionary<string, string> testData=new Dictionary<string, string>();
             int count = 100;
+
             for (int i = 0; i < count; i++)
             {
                 testData.Add(i.ToString(), (i*10).ToString());
@@ -153,11 +154,21 @@ namespace UnitTestProject1
     public class UnitTest2
     {
         static private string pathToNode = "D:\\Github\\shard-replication\\ConsoleApplication7\\bin\\Debug\\Node.exe";
+
         [TestMethod]
         public void StartTwoNodes()
         {
             Process.Start(pathToNode, "9000");
             Process.Start(pathToNode, "9001");
+        }
+
+        [TestMethod]
+        public void StartFourNodes()
+        {
+            Process.Start(pathToNode, "9000");
+            Process.Start(pathToNode, "9001");
+            Process.Start(pathToNode, "9002");
+            Process.Start(pathToNode, "9003");
         }
 
     }
@@ -167,8 +178,6 @@ namespace UnitTestProject1
     {
         static private string port = "9100";
         static private string countNodes = "2";
-        //static private string baseAddress = "http://localhost:" + port + "/";
-
         static private string pathToProxy = "D:\\Github\\shard-replication\\Proxy2\\bin\\Debug\\Proxy2.exe";
 
         public Dictionary<string, string> testData;
@@ -182,8 +191,7 @@ namespace UnitTestProject1
         public void OpenConnection()
         {
             Process.Start(pathToProxy, countNodes);
-        }
-      
+        }      
 
         [TestMethod]
         public void PutValues()
@@ -223,47 +231,39 @@ namespace UnitTestProject1
             }
 
         }
-
-        [TestMethod]
-        public void UpdateValues()
-        {            
-            foreach (var item in testData)
-            {
-                HttpClient client = new HttpClient();
-                var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(item.Value));
-                jsonContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json"); ;
-                var response = client.PutAsync("http://localhost:" + port + "/api/nodes/" + item.Key,
-                  jsonContent
-                   ).Result;
-            }
-            GetValues();
-
-        }
-        /*
+        
         [TestMethod]
         public void RemoveValues()
         {
             foreach (var item in testData)
             {
-                Delete(item.Key);
+                var result = new HttpClient().DeleteAsync("http://localhost:" + port + "/api/nodes/" + item.Key).Result;
             }
-            Assert.AreEqual(File.ReadAllLines(path).Length, 0);
-        }
-        
-
-        [TestMethod]
-        public void CheckRemoved()
+            checkRemoved();
+        }       
+ 
+        private  void checkRemoved()
         {
             foreach (var item in testData)
-            {
-                var value = Get(item.Key);
-                Assert.AreEqual(Get(item.Key), "BadRequest");
-            }
-        }
-        */
-    }
+            {               
 
-    
+                string content;
+
+                HttpClient client = new HttpClient();
+                var response = client.GetAsync("http://localhost:" + port + "/api/nodes/" + item.Key).Result;
+                var tmp = response.StatusCode;
+                if (response.StatusCode.ToString() != "OK")
+                {
+                    content = System.Net.HttpStatusCode.BadRequest.ToString();
+                }
+                else
+                    content = JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result).ToString();
+
+
+                Assert.AreEqual(content, "BadRequest");
+            }
+        }        
+    }    
 
     
 }
