@@ -149,14 +149,33 @@ namespace UnitTestProject1
             }
         }
     }
-    
+
+
     [TestClass]
-    public class UnitTest2
+    public class UnitTest2 
     {
-        static private string lastCountNodes = "2";
-        static private string countNodes = "4";
+        static private string port = "9100";
+        static private string countNodes = "2";
         static private string pathToProxy = "D:\\Github\\shard-replication\\Proxy2\\bin\\Debug\\Proxy2.exe";
+
+        static private string lastCountNodes = "2";
+        //static private string countNodes = "4";
+        //static private string pathToProxy = "D:\\Github\\shard-replication\\Proxy2\\bin\\Debug\\Proxy2.exe";
         static private string pathToNode = "D:\\Github\\shard-replication\\ConsoleApplication7\\bin\\Debug\\Node.exe";
+
+
+        public Dictionary<string, string> testData;
+
+        public UnitTest2()
+        {           
+            testData = new TestDataGenerator().GenerateTestData();
+        }
+
+        [TestMethod]
+        public void StartProxy()
+        {
+            Process.Start(pathToProxy, countNodes);
+        }
 
         [TestMethod]
         public void StartTwoNodes()
@@ -164,44 +183,6 @@ namespace UnitTestProject1
             Process.Start(pathToNode, "9000");
             Process.Start(pathToNode, "9001");
         }
-
-        [TestMethod]
-        public void StartFourNodes()
-        {
-            Process.Start(pathToNode, "9000");
-            Process.Start(pathToNode, "9001");
-            Process.Start(pathToNode, "9002");
-            Process.Start(pathToNode, "9003");
-        }
-
-        // старт прокси с решардингом
-        [TestMethod]
-        public void StartProxyWithReshard()
-        {
-            Process.Start(pathToProxy, countNodes + " "+ lastCountNodes);
-        }
-
-    }
-
-    [TestClass]
-    public class UnitTest3 
-    {
-        static private string port = "9100";
-        static private string countNodes = "2";
-        static private string pathToProxy = "D:\\Github\\shard-replication\\Proxy2\\bin\\Debug\\Proxy2.exe";
-
-        public Dictionary<string, string> testData;
-
-        public UnitTest3()
-        {           
-            testData = new TestDataGenerator().GenerateTestData();
-        }
-
-        [TestMethod]
-        public void OpenConnection()
-        {
-            Process.Start(pathToProxy, countNodes);
-        }      
 
         [TestMethod]
         public void PutValues()
@@ -237,44 +218,27 @@ namespace UnitTestProject1
                 Assert.AreNotEqual(content, "BadRequest");
                 Assert.AreEqual(content, item.Value);
             }
-
         }
-        
+
         [TestMethod]
-        public void RemoveValues()
+        public void StartFourNodes()
         {
-            foreach (var item in testData)
-            {
-                var result = new HttpClient().DeleteAsync("http://localhost:" + port + "/api/nodes/" + item.Key).Result;
-            }
-            CheckRemoved();
-        }       
- 
-        private void CheckRemoved()
+            Process.Start(pathToNode, "9000");
+            Process.Start(pathToNode, "9001");
+            Process.Start(pathToNode, "9002");
+            Process.Start(pathToNode, "9003");
+        }
+
+        // старт прокси с решардингом
+        [TestMethod]
+        public void StartProxyWithReshard()
         {
-            foreach (var item in testData)
-            {               
-
-                string content;
-
-                HttpClient client = new HttpClient();
-                var response = client.GetAsync("http://localhost:" + port + "/api/nodes/" + item.Key).Result;
-                var tmp = response.StatusCode;
-                if (response.StatusCode.ToString() != "OK")
-                {
-                    content = System.Net.HttpStatusCode.BadRequest.ToString();
-                }
-                else
-                    content = JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result).ToString();
-
-
-                Assert.AreEqual(content, "BadRequest");
-            }
+            Process.Start(pathToProxy, countNodes + " " + lastCountNodes);
         }        
     }
 
     [TestClass]
-    public class UnitTest4
+    public class UnitTest3
     {
         static private string MasterPort = "9000";
         static private string pathToNode = "D:\\Github\\shard-replication\\ConsoleApplication7\\bin\\Debug\\Node.exe";
@@ -283,7 +247,7 @@ namespace UnitTestProject1
         public Dictionary<string, string> testData;
         List<string> slavesPorts = new List<string>();
 
-        public UnitTest4()
+        public UnitTest3()
         {
             testData = new TestDataGenerator().GenerateTestData();
             slavesPorts.Add("9001");
