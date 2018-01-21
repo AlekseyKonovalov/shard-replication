@@ -63,13 +63,8 @@ namespace ConsoleApplication7
             if (Storage.slavesPorts.Count() > 0)
             {
                 foreach(var port in Storage.slavesPorts)
-                {               
-                    HttpClient client = new HttpClient();
-                    var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(value));
-                    jsonContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json"); ;
-                    var response = client.PutAsync("http://localhost:" + port + "/api/values/" + id,
-                      jsonContent
-                       ).Result;
+                {
+                    var response = HttpRequestSender.Put(value, id, port, "/api/values/");
                 }
             }
    
@@ -91,7 +86,7 @@ namespace ConsoleApplication7
             {
                 foreach (var port in Storage.slavesPorts)
                 {
-                    var result = new HttpClient().DeleteAsync("http://localhost:" + port + "/api/nodes/" + id).Result;
+                    var result = HttpRequestSender.Delete(id, port, "/api/values/");
                 }
             }
         }
