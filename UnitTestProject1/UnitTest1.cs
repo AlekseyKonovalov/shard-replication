@@ -174,7 +174,7 @@ namespace UnitTestProject1
             Process.Start(pathToNode, "9003");
         }
 
-
+        // старт прокси с решардингом
         [TestMethod]
         public void StartProxyWithReshard()
         {
@@ -271,7 +271,122 @@ namespace UnitTestProject1
                 Assert.AreEqual(content, "BadRequest");
             }
         }        
-    }    
+    }
 
-    
+    [TestClass]
+    public class UnitTest4
+    {
+        static private string MasterPort = "9000";
+        static private string pathToNode = "D:\\Github\\shard-replication\\ConsoleApplication7\\bin\\Debug\\Node.exe";
+        private string path = @"nodes\" + MasterPort + ".txt";
+
+        public Dictionary<string, string> testData;
+        List<string> slavesPorts = new List<string>();
+
+        public UnitTest4()
+        {
+            testData = new TestDataGenerator().GenerateTestData();
+            slavesPorts.Add("9001");
+            slavesPorts.Add("9002");
+        }
+
+        [TestMethod]
+        public void StartThreeNodes()
+        {
+            Process.Start(pathToNode, MasterPort);
+            Process.Start(pathToNode, slavesPorts[0]);
+            Process.Start(pathToNode, slavesPorts[1]);
+        }
+
+        [TestMethod]
+        public void PutSlavesPortsInMaster()
+        {
+
+            foreach (var port in slavesPorts)
+            {
+                HttpClient client = new HttpClient();
+                var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(""));
+                jsonContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json"); ;
+                var response = client.PutAsync("http://localhost:" + MasterPort +
+                    "/api/slaves/" + port,
+                  jsonContent
+                   ).Result;
+            }
+        }
+
+        [TestMethod]
+        public void PutValuesInMaster()
+        {
+            int oldSize = File.ReadAllLines(path).Length;
+
+            foreach (var item in testData)
+            {
+                HttpClient client = new HttpClient();
+                var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(item.Value));
+                jsonContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json"); ;
+                var response = client.PutAsync("http://localhost:" + MasterPort + "/api/values/" + item.Key,
+                  jsonContent
+                   ).Result;
+            }
+            int newSize = File.ReadAllLines(path).Length;
+
+            Assert.AreEqual(newSize, oldSize + testData.Count);
+        }
+
+
+        [TestMethod]
+        public void GetValuesInMasterAndSlaves()
+        {
+            foreach (var item in testData)
+            {
+                string contentMaster;
+
+                HttpClient client = new HttpClient();
+                var response = client.GetAsync("http://localhost:" + MasterPort + "/api/values/" + item.Key).Result;
+                var tmp = response.StatusCode;
+                if (response.StatusCode.ToString() != "OK")
+                {
+                    contentMaster = System.Net.HttpStatusCode.BadRequest.ToString();
+                }
+                else
+                    contentMaster = JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result).ToString();
+
+
+                string contentSlave1;
+
+                client = new HttpClient();
+                response = client.GetAsync("http://localhost:" + slavesPorts[0] + "/api/values/" + item.Key).Result;
+                tmp = response.StatusCode;
+                if (response.StatusCode.ToString() != "OK")
+                {
+                    contentSlave1 = System.Net.HttpStatusCode.BadRequest.ToString();
+                }
+                else
+                    contentSlave1 = JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result).ToString();
+
+
+                string contentSlave2;
+
+                client = new HttpClient();
+                response = client.GetAsync("http://localhost:" + slavesPorts[1] + "/api/values/" + item.Key).Result;
+                tmp = response.StatusCode;
+                if (response.StatusCode.ToString() != "OK")
+                {
+                    contentSlave2 = System.Net.HttpStatusCode.BadRequest.ToString();
+                }
+                else
+                    contentSlave2 = JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result).ToString();
+
+
+                Assert.AreNotEqual(contentMaster, "BadRequest");
+                Assert.AreNotEqual(contentSlave1, "BadRequest");
+                Assert.AreNotEqual(contentSlave2, "BadRequest");
+
+                Assert.AreEqual(contentMaster, contentSlave1);
+                Assert.AreEqual(contentMaster, contentSlave2);
+            }
+        }
+    }
+
+
 }

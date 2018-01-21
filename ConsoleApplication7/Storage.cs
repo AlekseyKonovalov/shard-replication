@@ -9,6 +9,8 @@ namespace ConsoleApplication7
     public static class Storage
     {
         static public string port;
-        static public string filePath;        
+        static public string filePath;
+
+        static public List<string> slavesPorts;
     }
 }

@@ -18,6 +18,7 @@ namespace ConsoleApplication7
         {
             Storage.port = args[0];
             //Storage.port = "9001";
+            Storage.slavesPorts = new List<string>();
             
             CreateDB();
             
@@ -30,13 +31,15 @@ namespace ConsoleApplication7
 
         static private void CreateDB()
         {
+
             //Storage.filePath= @"nodes\" + Storage.port + ".txt";
             Storage.filePath = @"nodes\" + Storage.port + ".txt";
-
+            
             if (!File.Exists(Storage.filePath))
             {
                 File.Create(Storage.filePath);
             }
+        
         }
     }
 }

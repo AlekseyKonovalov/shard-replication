@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
+ 
+using System.Net.Http; 
+using System.Net.Http.Headers;
+ 
+
 
 namespace ConsoleApplication7
 {
     public class ValuesController : ApiController
     {
         private Dictionary<string, string> dictionary = new Dictionary<string, string>();
-        
-        private void readAll()
+       
+        private void readAllNotes()
         {
             foreach (var item in File.ReadLines(Storage.filePath).ToList())
             {
@@ -21,7 +23,7 @@ namespace ConsoleApplication7
                 dictionary.Add(key, value);
             }
         }
-        private void writeAll()
+        private void writeAllNotes()
         {
             using (StreamWriter writer = new StreamWriter(Storage.filePath, false))
             {
@@ -32,23 +34,12 @@ namespace ConsoleApplication7
                 }
             }
         }
-
-        private void writeNote(string key , string value)
-        {
-            using (StreamWriter writer = new StreamWriter(Storage.filePath, false))
-            {
-
-                    writer.Write(key + " ");
-                    writer.WriteLine(value);
-               
-            }
-        }
         
 
         // GET api/values/5 
         public string Get(string id)
         {
-            readAll();
+            readAllNotes();
             return dictionary[id];
         }
 
@@ -57,7 +48,7 @@ namespace ConsoleApplication7
         public void Put(string id, [FromBody]string value)
         {
 
-            readAll();
+            readAllNotes();
             if (!dictionary.ContainsKey(id))
             {
                 dictionary.Add(id, value); 
@@ -66,19 +57,43 @@ namespace ConsoleApplication7
             {
                 dictionary[id] = value;
             }
-            writeAll();
-            //writeNote(id, value);
-            
+            writeAllNotes();
+
+            //рассылка в слейвы
+            if (Storage.slavesPorts.Count() > 0)
+            {
+                foreach(var port in Storage.slavesPorts)
+                {               
+                    HttpClient client = new HttpClient();
+                    var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(value));
+                    jsonContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json"); ;
+                    var response = client.PutAsync("http://localhost:" + port + "/api/values/" + id,
+                      jsonContent
+                       ).Result;
+                }
+            }
+   
+
+
         }
 
         public void Delete(string id)
         {
-            readAll();
+            readAllNotes();
             if (dictionary.ContainsKey(id))
             {
                 dictionary.Remove(id);
             }
-            writeAll();
+            writeAllNotes();
+
+            //рассылка в слейвы
+            if (Storage.slavesPorts.Count() > 0)
+            {
+                foreach (var port in Storage.slavesPorts)
+                {
+                    var result = new HttpClient().DeleteAsync("http://localhost:" + port + "/api/nodes/" + id).Result;
+                }
+            }
         }
 
        
