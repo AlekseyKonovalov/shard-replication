@@ -7,7 +7,6 @@ namespace Proxy
     public static class Storage
     {
         static public string countNodes;
-        //static public int defaultPort;
         static public string lastCountNodes;
     }
 }

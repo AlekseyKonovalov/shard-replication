@@ -122,7 +122,6 @@ D:\Github\shard-replication\ConsoleApplication7\bin\Debug\System.Web.Http.Owin.x
 D:\Github\shard-replication\ConsoleApplication7\bin\Debug\System.Web.Http.SelfHost.xml
 D:\Github\shard-replication\ConsoleApplication7\bin\Debug\ru\System.Net.Http.Formatting.resources.dll
 D:\Github\shard-replication\ConsoleApplication7\bin\Debug\ru\System.Web.Http.resources.dll
-D:\Github\shard-replication\ConsoleApplication7\obj\Debug\Node.csprojResolveAssemblyReference.cache
 D:\Github\shard-replication\ConsoleApplication7\obj\Debug\Node.csproj.CoreCompileInputs.cache
 D:\Github\shard-replication\ConsoleApplication7\obj\Debug\Node.exe
 D:\Github\shard-replication\ConsoleApplication7\obj\Debug\Node.pdb

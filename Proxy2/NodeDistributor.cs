@@ -9,6 +9,7 @@ using System.Web.Http;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Http;
+using ConsoleApplication7;
 using Proxy;
 
 namespace Proxy2
@@ -72,36 +73,19 @@ namespace Proxy2
 
         private string Get(int port, int  key)
         {
-            string content;
-
-            HttpClient client = new HttpClient();
-            var response = client.GetAsync("http://localhost:" + port.ToString() + "/api/values/" + key.ToString()).Result;
-            var tmp = response.StatusCode;
-            if (response.StatusCode.ToString() != "OK")
-            {
-                content = "BadRequest";
-            }
-            else
-                content = JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result).ToString();
+            string content = HttpRequestSender.Get(key.ToString(), port.ToString(), "/api/values/");
 
             return content;
         }
 
         private void Put(string value, string port, string key)
         {
-
-            HttpClient client = new HttpClient();
-            var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(value));
-            jsonContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json"); ;
-            var response = client.PutAsync("http://localhost:" + port + "/api/values/" + key,
-              jsonContent
-               ).Result;
-
+            var response = HttpRequestSender.Put(value, key, port, "/api/values/");
         }
 
         private void Delete(string port, string key)
         {
-            var result = new HttpClient().DeleteAsync("http://localhost:" + port + "/api/values/" + key).Result;
+            var result = HttpRequestSender.Delete(key, port, "/api/values/");
         }
     }
 

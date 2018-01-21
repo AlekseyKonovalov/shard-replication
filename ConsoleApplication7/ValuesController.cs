@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web.Http;
- 
-using System.Net.Http; 
+using System.Web.Http; 
 using System.Net.Http.Headers;
  
 
@@ -35,7 +33,6 @@ namespace ConsoleApplication7
             }
         }
         
-
         // GET api/values/5 
         public string Get(string id)
         {
@@ -67,9 +64,6 @@ namespace ConsoleApplication7
                     var response = HttpRequestSender.Put(value, id, port, "/api/values/");
                 }
             }
-   
-
-
         }
 
         public void Delete(string id)

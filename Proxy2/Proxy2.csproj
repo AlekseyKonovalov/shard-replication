@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HttpRequestSender.cs" />
     <Compile Include="NodeDistributor.cs" />
     <Compile Include="NodesController .cs" />
     <Compile Include="Program.cs" />

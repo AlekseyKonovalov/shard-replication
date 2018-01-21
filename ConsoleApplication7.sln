@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{72507398-E692-4E14-B19D-EB61C7174A68}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proxy2", "Proxy2\Proxy2.csproj", "{F4DDBC31-1121-4E55-864B-456FA58AF8AF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3FE02E7D-064A-4007-A18A-737393C29333} = {3FE02E7D-064A-4007-A18A-737393C29333}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
