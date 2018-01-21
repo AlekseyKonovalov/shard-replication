@@ -19,7 +19,7 @@ namespace Proxy
             //Storage.countNodes = "4";
             //Storage.defaultPort = 9000;
             
-            if (args[1] != null)
+            if (args.Length>1)
             {
                 Storage.lastCountNodes = args[1];
                 Thread ReshardThread = new Thread(resharding);

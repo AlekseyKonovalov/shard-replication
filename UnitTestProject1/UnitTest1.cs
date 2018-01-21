@@ -64,12 +64,7 @@ namespace UnitTestProject1
 
             foreach (var item in testData)
             {
-                HttpClient client = new HttpClient();
-                var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(item.Value));
-                jsonContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json"); ;
-                var response = client.PutAsync("http://localhost:" + port + "/api/values/" + item.Key,
-                  jsonContent
-                   ).Result;
+                var response=HttpRequestSender.Put(item.Value, item.Key, port, "/api/values/");
             }
             int newSize = File.ReadAllLines(path).Length;
 
@@ -83,17 +78,8 @@ namespace UnitTestProject1
 
             foreach (var item in testData)
             {
-                string content;
-                               
-                HttpClient client = new HttpClient();
-                var response = client.GetAsync("http://localhost:" + port + "/api/values/" + item.Key).Result;
-                var tmp = response.StatusCode;
-                if (response.StatusCode.ToString() != "OK")
-                {
-                    content= System.Net.HttpStatusCode.BadRequest.ToString();
-                }
-                else
-                    content= JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result).ToString();
+                string content = HttpRequestSender.Get(item.Key, port, "/api/values/");
+
                 Assert.AreNotEqual(content, "BadRequest");
                 Assert.AreEqual(content, item.Value);
             }
@@ -107,12 +93,7 @@ namespace UnitTestProject1
 
             foreach (var item in testData)
             {
-                HttpClient client = new HttpClient();
-                var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(item.Value));
-                jsonContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json"); ;
-                var response = client.PutAsync("http://localhost:" + port + "/api/values/" + item.Key,
-                  jsonContent
-                   ).Result;
+                var response = HttpRequestSender.Put(item.Value, item.Key, port, "/api/values/");
             }
 
             GetValues();
@@ -123,7 +104,7 @@ namespace UnitTestProject1
         {
             foreach (var item in testData)
             {
-                var result = new HttpClient().DeleteAsync("http://localhost:" + port + "/api/values/" + item.Key).Result;
+                var result = HttpRequestSender.Delete(item.Key, port, "/api/values/");
             }
             Assert.AreEqual(File.ReadAllLines(path).Length, 0);
         }
@@ -133,18 +114,7 @@ namespace UnitTestProject1
         {
             foreach (var item in testData)
             {
-                string content;
-
-                HttpClient client = new HttpClient();
-                var response = client.GetAsync("http://localhost:" + port + "/api/values/" + item.Key).Result;
-                var tmp = response.StatusCode;
-                if (response.StatusCode.ToString() != "OK")
-                {
-                    content = System.Net.HttpStatusCode.BadRequest.ToString();
-                }
-                else
-                    content = JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result).ToString();
-
+                string content = HttpRequestSender.Get(item.Key, port, "/api/values/");
                 Assert.AreEqual(content, "BadRequest");
             }
         }
@@ -156,11 +126,7 @@ namespace UnitTestProject1
     {
         static private string port = "9100";
         static private string countNodes = "2";
-        static private string pathToProxy = "D:\\Github\\shard-replication\\Proxy2\\bin\\Debug\\Proxy2.exe";
-
-        static private string lastCountNodes = "2";
-        //static private string countNodes = "4";
-        //static private string pathToProxy = "D:\\Github\\shard-replication\\Proxy2\\bin\\Debug\\Proxy2.exe";
+        static private string pathToProxy = "D:\\Github\\shard-replication\\Proxy2\\bin\\Debug\\Proxy2.exe";        
         static private string pathToNode = "D:\\Github\\shard-replication\\ConsoleApplication7\\bin\\Debug\\Node.exe";
 
 
@@ -189,12 +155,7 @@ namespace UnitTestProject1
         {           
             foreach (var item in testData)
             {
-                HttpClient client = new HttpClient();
-                var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(item.Value));
-                jsonContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json"); ;
-                var response = client.PutAsync("http://localhost:" + port + "/api/nodes/" + item.Key,
-                  jsonContent
-                   ).Result;
+                var response = HttpRequestSender.Put(item.Value, item.Key, port, "/api/nodes/");
             }
         }
 
@@ -203,18 +164,8 @@ namespace UnitTestProject1
         {
             foreach (var item in testData)
             {
-                string content;
-                               
-                HttpClient client = new HttpClient();
-                var response = client.GetAsync("http://localhost:" + port + "/api/nodes/" + item.Key).Result;
-                var tmp = response.StatusCode;
-                if (response.StatusCode.ToString() != "OK")
-                {
-                    content= System.Net.HttpStatusCode.BadRequest.ToString();
-                }
-                else
-                    content= JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result).ToString();
-                                
+                string content = HttpRequestSender.Get(item.Key, port, "/api/nodes/");
+
                 Assert.AreNotEqual(content, "BadRequest");
                 Assert.AreEqual(content, item.Value);
             }
@@ -233,7 +184,8 @@ namespace UnitTestProject1
         [TestMethod]
         public void StartProxyWithReshard()
         {
-            Process.Start(pathToProxy, countNodes + " " + lastCountNodes);
+            //аргументы: первый - сколько стало  нод, второй - сколько было нод
+            Process.Start(pathToProxy, "4" + " " + "2");
         }        
     }
 
@@ -268,13 +220,7 @@ namespace UnitTestProject1
 
             foreach (var port in slavesPorts)
             {
-                HttpClient client = new HttpClient();
-                var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(""));
-                jsonContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json"); ;
-                var response = client.PutAsync("http://localhost:" + MasterPort +
-                    "/api/slaves/" + port,
-                  jsonContent
-                   ).Result;
+                var response = HttpRequestSender.Put("", port, MasterPort, "/api/slaves/");
             }
         }
 
@@ -285,12 +231,7 @@ namespace UnitTestProject1
 
             foreach (var item in testData)
             {
-                HttpClient client = new HttpClient();
-                var jsonContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(item.Value));
-                jsonContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json"); ;
-                var response = client.PutAsync("http://localhost:" + MasterPort + "/api/values/" + item.Key,
-                  jsonContent
-                   ).Result;
+                var response = HttpRequestSender.Put(item.Value, item.Key, MasterPort, "/api/values/");
             }
             int newSize = File.ReadAllLines(path).Length;
 
@@ -303,44 +244,11 @@ namespace UnitTestProject1
         {
             foreach (var item in testData)
             {
-                string contentMaster;
+                string contentMaster = HttpRequestSender.Get(item.Key, MasterPort, "/api/values/");
 
-                HttpClient client = new HttpClient();
-                var response = client.GetAsync("http://localhost:" + MasterPort + "/api/values/" + item.Key).Result;
-                var tmp = response.StatusCode;
-                if (response.StatusCode.ToString() != "OK")
-                {
-                    contentMaster = System.Net.HttpStatusCode.BadRequest.ToString();
-                }
-                else
-                    contentMaster = JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result).ToString();
+                string contentSlave1 = HttpRequestSender.Get(item.Key, slavesPorts[0], "/api/values/");
 
-
-                string contentSlave1;
-
-                client = new HttpClient();
-                response = client.GetAsync("http://localhost:" + slavesPorts[0] + "/api/values/" + item.Key).Result;
-                tmp = response.StatusCode;
-                if (response.StatusCode.ToString() != "OK")
-                {
-                    contentSlave1 = System.Net.HttpStatusCode.BadRequest.ToString();
-                }
-                else
-                    contentSlave1 = JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result).ToString();
-
-
-                string contentSlave2;
-
-                client = new HttpClient();
-                response = client.GetAsync("http://localhost:" + slavesPorts[1] + "/api/values/" + item.Key).Result;
-                tmp = response.StatusCode;
-                if (response.StatusCode.ToString() != "OK")
-                {
-                    contentSlave2 = System.Net.HttpStatusCode.BadRequest.ToString();
-                }
-                else
-                    contentSlave2 = JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result).ToString();
-
+                string contentSlave2 = HttpRequestSender.Get(item.Key, slavesPorts[1], "/api/values/");
 
                 Assert.AreNotEqual(contentMaster, "BadRequest");
                 Assert.AreNotEqual(contentSlave1, "BadRequest");
